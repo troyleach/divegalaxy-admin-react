@@ -5,7 +5,7 @@ import { NavItem, Navbar } from 'react-bootstrap';
 function Footer(/*props*/) {
   return (
     <footer>
-      <Navbar fixed="bottom" className="justify-content-center">
+      <Navbar sticky="bottom" className="justify-content-center">
         <NavItem className="small copyright">
           © dive galaxsea 2019
         </NavItem>

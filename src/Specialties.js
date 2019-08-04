@@ -2,16 +2,24 @@ import React, {
   Component
 } from 'react';
 
-import BodyDisplay from './BodyDisplay';
+import DisplayTable from './Table';
+const fakeData = require('./data');
 
 class Specialties extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: fakeData
+    }
+  }
+
   render() {
     return (
       <div className="App">
         <div className='container'>
-          <p>Specialties Rental Stuff</p>
+          <h3>Specialties Rental Stuff</h3>
+          <DisplayTable {...this.state} />
         </div >
-        {/* <BodyDisplay /> */}
       </div >
     );
   };

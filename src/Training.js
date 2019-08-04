@@ -2,6 +2,7 @@ import React, {
   Component
 } from 'react';
 
+import DisplayTable from './Table';
 const fakeData = require('./data');
 
 class Training extends Component {
@@ -14,7 +15,8 @@ class Training extends Component {
   render() {
     return (
       <div className='container'>
-        <p>Training for your viewing pleasure</p>
+        <h3>Training</h3>
+        <DisplayTable {...this.state} />
       </div >
     )
   }

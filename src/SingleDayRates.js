@@ -2,6 +2,7 @@ import React, {
   Component
 } from 'react';
 
+import DisplayTable from './Table';
 const fakeData = require('./data');
 
 // TODO in a compoonentDidMount() {} make my http requests here
@@ -13,10 +14,12 @@ class SingleDayRates extends Component {
       data: fakeData
     }
   }
+
   render() {
     return (
       <div className='container'>
-        <p>Single Day Rates for your viewing pleasure</p>
+        <h3>Single Day Rates</h3>
+        <DisplayTable {...this.state} />
       </div >
     )
   }

@@ -1,12 +1,11 @@
 import React, {
   Component
 } from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import BodyDisplay from './BodyDisplay';
 import Header from './Header';
 import Footer from './Footer';
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import GearRental from './GearRental';
 import SingleDayRates from './SingleDayRates';
 import Training from './Training';
