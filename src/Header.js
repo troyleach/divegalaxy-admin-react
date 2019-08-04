@@ -9,11 +9,11 @@ class Header extends React.Component {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#features">Single Day Rates</Nav.Link>
-            <Nav.Link href="#pricing">Gear Rental</Nav.Link>
-            <Nav.Link href="#pricing">Training</Nav.Link>
-            <Nav.Link href="#pricing">Specialties</Nav.Link>
-            <Nav.Link href="#pricing">Clients</Nav.Link>
+            <Nav.Link href="#SingleDayRates">Single Day Rates</Nav.Link>
+            <Nav.Link href="#GearRental">Gear Rental</Nav.Link>
+            <Nav.Link href="#Training">Training</Nav.Link>
+            <Nav.Link href="#Specialties">Specialties</Nav.Link>
+            <Nav.Link href="#Clients">Clients</Nav.Link>
           </Nav>
           <Nav>
             <Nav.Link href="#deets">Log Out</Nav.Link>

@@ -4,7 +4,30 @@ import React, {
 import { Button, Table } from 'react-bootstrap';
 
 class DisplayTable extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  renderTableData() {
+    return this.props.data.map((item, index) => {
+      const { id, title, description, price } = item //destructuring
+      return (
+        <tr key={id}>
+          <td>{title}</td>
+          <td>{description}</td>
+          <td>{price}</td>
+          <td>
+            <Button variant="outline-success" className="action-buttons">Edit</Button>
+            <Button variant="outline-danger" className="action-buttons">Delete</Button>
+          </td>
+        </tr>
+      )
+    })
+  }
+
   render() {
+    // console.log('shit head in table', data)
+    console.log('data', this.props)
     return (
       <div className='container'>
         <Table striped bordered hover size="sm">
@@ -17,35 +40,10 @@ class DisplayTable extends Component {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>
-                <Button variant="outline-success" className="action-buttons">Edit</Button>
-                <Button variant="outline-danger" className="action-buttons">Delete</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-              <td>
-                <Button variant="outline-success" className="action-buttons">Edit</Button>
-                <Button variant="outline-danger" className="action-buttons">Delete</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <td>
-                <Button variant="outline-success" className="action-buttons">Edit</Button>
-                <Button variant="outline-danger" className="action-buttons">Delete</Button>
-              </td>
-            </tr>
+            {this.renderTableData()}
           </tbody>
         </Table>
+        <Button variant="outline-success" block>New</Button>
       </div >
     )
   }
