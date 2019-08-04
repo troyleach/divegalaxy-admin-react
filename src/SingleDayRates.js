@@ -2,11 +2,11 @@ import React, {
   Component
 } from 'react';
 
-import DisplayTable from './Table';
-
 const fakeData = require('./data');
 
-class BodyDisplay extends Component {
+// TODO in a compoonentDidMount() {} make my http requests here
+
+class SingleDayRates extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,10 +16,10 @@ class BodyDisplay extends Component {
   render() {
     return (
       <div className='container'>
-        <DisplayTable {...this.state} />
+        <p>Single Day Rates for your viewing pleasure</p>
       </div >
     )
   }
 }
 
-export default BodyDisplay;
+export default SingleDayRates;

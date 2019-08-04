@@ -2,11 +2,9 @@ import React, {
   Component
 } from 'react';
 
-import DisplayTable from './Table';
-
 const fakeData = require('./data');
 
-class BodyDisplay extends Component {
+class Training extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,10 +14,10 @@ class BodyDisplay extends Component {
   render() {
     return (
       <div className='container'>
-        <DisplayTable {...this.state} />
+        <p>Training for your viewing pleasure</p>
       </div >
     )
   }
 }
 
-export default BodyDisplay;
+export default Training;
