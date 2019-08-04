@@ -1,7 +1,8 @@
 import React from 'react';
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, Button } from 'react-bootstrap';
 
 class Header extends React.Component {
+
   render() {
     return (
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -16,7 +17,7 @@ class Header extends React.Component {
             <Nav.Link href="#Clients">Clients</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">Log Out</Nav.Link>
+            <Nav.Link href="#logOut">Log Out</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
