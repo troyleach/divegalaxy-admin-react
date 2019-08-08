@@ -1,5 +1,3 @@
-// TODO: my nav buttons no longer worker. I think it has to do with a styingthing.Button
-// if I have the inspector open they work otherwise they dont
 import React, {
   Component
 } from 'react';
@@ -7,42 +5,55 @@ import { Button, Table } from 'react-bootstrap';
 
 // TODO fix the folder spelling
 import Modal from './compoonnents/Modal';
-// import { worker } from 'cluster'; not sure where this came from??
+let category;
 
 class DisplayTable extends Component {
   constructor(props) {
     super(props);
+    console.log('props in display table', props.category)
+    category = props.category
     this.state = {
       isShowing: false,
       title: '',
       description: '',
       price: '',
-      itemId: ''
+      itemId: '',
+      category: category
     }
   }
 
-  editToItem(index) {
-    this.setState({
-      isShowing: true,
-      itemToEdit: index
-    })
-
-  }
-
-  openModalHandler(item) {
-    console.log('here I am in openModalHandler', item)
+  openEditModalHandler(item) {
+    const headerString = `Edit ${this.state.category}`
     this.setState({
       isShowing: true,
       title: item.title,
       description: item.description,
       price: item.price,
-      itemId: item.id
+      itemId: item.id,
+      category: headerString
+    })
+  }
+
+  openNewModalHandler = () => {
+    const headerString = `Create a New ${this.state.category}`
+    this.setState({
+      isShowing: true,
+      title: '',
+      description: '',
+      price: '',
+      itemId: '',
+      category: headerString
     })
   }
 
   closeModalHandler = () => {
     this.setState({
-      isShowing: false
+      isShowing: false,
+      title: '',
+      description: '',
+      price: '',
+      itemId: '',
+      category: category
     })
   }
 
@@ -55,8 +66,7 @@ class DisplayTable extends Component {
           <td>{description}</td>
           <td>{price}</td>
           <td>
-            <Button variant="outline-success" className="action-buttons open-modal-btn" onClick={() => this.openModalHandler(item)}>Edit</Button>
-            {/* <Button variant="outline-success" className="action-buttons">Edit</Button> */}
+            <Button variant="outline-success" className="action-buttons open-modal-btn" onClick={() => this.openEditModalHandler(item)}>Edit</Button>
             <Button variant="outline-danger" className="action-buttons">Delete</Button>
           </td>
         </tr>
@@ -65,8 +75,6 @@ class DisplayTable extends Component {
   }
 
   render() {
-    // console.log('shit head in table', data)
-    console.log('data', this.props)
     return (
       <div className='container'>
         <Table striped bordered hover size="sm">
@@ -83,13 +91,12 @@ class DisplayTable extends Component {
           </tbody>
         </Table>
 
-        <Button variant="outline-success" className="action-buttons open-modal-btn" onClick={this.openModalHandler} block>New</Button>
-        {/* <Button variant="outline-success" block>New</Button> */}
+        <div>
+          <Button variant="outline-success" className="action-buttons open-modal-btn" onClick={this.openNewModalHandler} block>New</Button>
+        </div>
 
         <div>
           {this.state.isShowing ? <div onClick={this.closeModalHandler} className="back-drop"></div> : null}
-
-          {/* <Button variant="outline-success" className="open-modal-btn" onClick={this.openModalHandler}>Open Modal</Button> */}
 
           <Modal
             className="modal"
@@ -98,7 +105,8 @@ class DisplayTable extends Component {
             itemId={this.state.itemId}
             title={this.state.title}
             price={this.state.price}
-            description={this.state.description} />
+            description={this.state.description}
+            category={this.state.category} />
         </div>
       </div >
     )

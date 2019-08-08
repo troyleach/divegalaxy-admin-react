@@ -9,7 +9,8 @@ class Specialties extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: fakeData
+      data: fakeData,
+      category: "Specialties"
     }
   }
 
@@ -17,7 +18,7 @@ class Specialties extends Component {
     return (
       <div className="App">
         <div className='container'>
-          <h3>Specialties Rental Stuff</h3>
+          <h3>{this.state.category}</h3>
           <DisplayTable {...this.state} />
         </div >
       </div >

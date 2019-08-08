@@ -1,3 +1,13 @@
+.modal-show-state {
+  transform: translateY(-90vh);
+  opacity: 1;
+}
+
+.modal-no-show-state {
+  transform: translateY(-150vh);
+  opacity: 0;
+}
+
 .modal-wrapper {
     background: white;
     border: 1px solid #d0cccc;
@@ -24,7 +34,7 @@
 
 .modal-body {
     padding: 10px 15px;
-    text-align: center;
+    text-align: justify;
 }
 
 .modal-footer {

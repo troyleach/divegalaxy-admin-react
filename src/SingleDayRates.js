@@ -11,14 +11,15 @@ class SingleDayRates extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: fakeData
+      data: fakeData,
+      category: "Single Day Rate"
     }
   }
 
   render() {
     return (
       <div className='container'>
-        <h3>Single Day Rates</h3>
+        <h3>{this.state.category}</h3>
         <DisplayTable {...this.state} />
       </div >
     )
