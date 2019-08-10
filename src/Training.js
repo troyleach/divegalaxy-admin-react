@@ -3,19 +3,26 @@ import React, {
 } from 'react';
 
 import DisplayTable from './Table';
-const fakeData = require('./data');
+import apiService from './services/api';
 
 class Training extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: fakeData
+      data: [],
+      category: "Training"
     }
   }
+
+  async componentDidMount() {
+    const data = await apiService.getData('trainings')
+    this.setState({ data: data });
+  }
+
   render() {
     return (
       <div className='container'>
-        <h3>Training</h3>
+        <h3>{this.state.category}</h3>
         <DisplayTable {...this.state} />
       </div >
     )

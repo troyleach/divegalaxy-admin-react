@@ -3,21 +3,27 @@ import React, {
 } from 'react';
 
 import DisplayTable from './Table';
-const fakeData = require('./data');
+import apiService from './services/api';
 
 class GearRental extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: fakeData
+      data: [],
+      category: "Gear Rental"
     }
+  }
+
+  async componentDidMount() {
+    const data = await apiService.getData('rentals')
+    this.setState({ data: data });
   }
 
   render() {
     return (
       <div className="App">
         <div className='container'>
-          <h3>Gear Rental Stuff</h3>
+          <h3>{this.state.category}</h3>
           <DisplayTable {...this.state} />
         </div >
       </div >

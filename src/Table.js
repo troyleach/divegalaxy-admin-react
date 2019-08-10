@@ -65,7 +65,7 @@ class DisplayTable extends Component {
           <td>{title}</td>
           <td>{description}</td>
           <td>{price}</td>
-          <td>
+          <td className='action-col'>
             <Button variant="outline-success" className="action-buttons open-modal-btn" onClick={() => this.openEditModalHandler(item)}>Edit</Button>
             <Button variant="outline-danger" className="action-buttons">Delete</Button>
           </td>

@@ -3,15 +3,20 @@ import React, {
 } from 'react';
 
 import DisplayTable from './Table';
-const fakeData = require('./data');
+import apiService from './services/api';
 
 class Specialties extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: fakeData,
+      data: [],
       category: "Specialties"
     }
+  }
+
+  async componentDidMount() {
+    const data = await apiService.getData('specialties')
+    this.setState({ data: data });
   }
 
   render() {

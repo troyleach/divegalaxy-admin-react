@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 
 import DisplayTable from './Table';
-const fakeData = require('./data');
+import apiService from './services/api';
 
 // TODO in a compoonentDidMount() {} make my http requests here
 
@@ -11,9 +11,14 @@ class SingleDayRates extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: fakeData,
+      data: [],
       category: "Single Day Rate"
     }
+  }
+
+  async componentDidMount() {
+    const data = await apiService.getData('divings')
+    this.setState({ data: data });
   }
 
   render() {
