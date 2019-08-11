@@ -12,16 +12,24 @@ const apiService = {
   getData: (category) => {
     return axios.get(`${URL}${category}`, { headers: HEADERS })
       .then(res => {
-        console.log('here i am in the data', res.data)
+        console.log('GET the data', res.data)
         return res.data
-        // this.setState({ data: res.data }); callback?
       })
   },
 
-  postTraining: () => {
+  deleteData: (pathAndId) => {
     console.log("did this work")
-    // do some stuff;
-  }
+    return axios.delete(`${URL}${pathAndId}`, { headers: HEADERS })
+      .then(res => {
+        console.log('Delete data', res.data)
+        return res.data
+      })
+  },
+
+  editData: (item) => { },
+  newData: (item) => { },
+  logIn: () => { },
+  logOut: () => { }
 }
 
 export default apiService;

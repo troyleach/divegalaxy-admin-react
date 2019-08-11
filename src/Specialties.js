@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 
 import DisplayTable from './Table';
+// TODO is there a way to bring in just the one function i need?
 import apiService from './services/api';
 
 class Specialties extends Component {

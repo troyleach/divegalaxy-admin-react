@@ -5,6 +5,7 @@ import { Button, Table } from 'react-bootstrap';
 
 // TODO fix the folder spelling
 import Modal from './compoonnents/Modal';
+import apiService from './services/api';
 let category;
 
 class DisplayTable extends Component {
@@ -57,6 +58,17 @@ class DisplayTable extends Component {
     })
   }
 
+  deleteHandler = (id) => {
+    const path = this.state.category.toLowerCase();
+    const url = `${path}/${id}`
+    apiService.deleteData(url)
+    this.setState({
+      isShowing: false,
+    })
+    // BAD BAD use react to update component
+    window.location.reload(true);
+  }
+
   renderTableData() {
     return this.props.data.map((item, index) => {
       const { id, title, description, price } = item //destructuring
@@ -67,7 +79,7 @@ class DisplayTable extends Component {
           <td>{price}</td>
           <td className='action-col'>
             <Button variant="outline-success" className="action-buttons open-modal-btn" onClick={() => this.openEditModalHandler(item)}>Edit</Button>
-            <Button variant="outline-danger" className="action-buttons">Delete</Button>
+            <Button variant="outline-danger" className="action-buttons" onClick={() => this.deleteHandler(item.id)}>Delete</Button>
           </td>
         </tr>
       )
