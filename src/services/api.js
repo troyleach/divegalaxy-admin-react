@@ -6,9 +6,6 @@ const HEADERS = { 'Authorization': 'Token "0216e2a5ae26a98de75dbfc4a353182a"' };
 
 
 const apiService = {
-  // --------------------------------
-  //  get all trainings
-  // --------------------------------
   getData: (category) => {
     return axios.get(`${URL}${category}`, { headers: HEADERS })
       .then(res => {
@@ -18,7 +15,7 @@ const apiService = {
   },
 
   deleteData: (pathAndId) => {
-    console.log("did this work")
+    console.log("Deleted")
     return axios.delete(`${URL}${pathAndId}`, { headers: HEADERS })
       .then(res => {
         console.log('Delete data', res.data)
@@ -26,7 +23,23 @@ const apiService = {
       })
   },
 
-  editData: (item) => { },
+  editData: (item) => {
+    console.log("Edit this: ", item)
+    // should be item.title
+    const form = {
+      specialty: {
+        title: item.title,
+        description: item.description,
+        price: item.price
+      }
+    }
+    const pathAndId = 99999;
+    return axios.delete(`${URL}${pathAndId}`, { headers: HEADERS }, form)
+      .then(res => {
+        console.log('Delete data', res.data)
+        return res.data
+      })
+  },
   newData: (item) => { },
   logIn: () => { },
   logOut: () => { }

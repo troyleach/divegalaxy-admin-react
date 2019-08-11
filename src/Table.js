@@ -47,6 +47,19 @@ class DisplayTable extends Component {
     })
   }
 
+  saveModalHandler = (event) => {
+    const path = this.state.category.toLowerCase();
+    const url = `${path}/${this.state.id}`
+    const body = 'stuff goes here'
+    apiService.editData(url)
+    this.setState({
+      isShowing: false,
+    })
+    // BAD BAD use react to update component
+    window.location.reload(true);
+
+  }
+
   closeModalHandler = () => {
     this.setState({
       isShowing: false,
@@ -114,6 +127,7 @@ class DisplayTable extends Component {
             className="modal"
             show={this.state.isShowing}
             close={this.closeModalHandler}
+            // save={this.saveModalHandler}
             itemId={this.state.itemId}
             title={this.state.title}
             price={this.state.price}
