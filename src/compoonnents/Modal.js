@@ -2,8 +2,11 @@ import React from 'react';
 
 import { Form } from 'react-bootstrap';
 import './Modal.css';
+import './priceForm';
 
+// Make a new class called formSomething bring it here
 const modal = (props) => {
+  console.log('this is the props place', props)
   return (
     <div>
       <div className="modal-wrapper"
@@ -21,6 +24,10 @@ const modal = (props) => {
             <Form.Group controlId="formGroupTitle">
               <Form.Label>Title</Form.Label>
               <Form.Control type="input" placeholder={props.title || "Enter title"} />
+
+              <input type="text" value={this.state.title} onChange={this.handleChange} />
+              <input type="text" value={props.title} />
+
             </Form.Group>
             <Form.Group controlId="formGroupDescription">
               <Form.Label>Description</Form.Label>
