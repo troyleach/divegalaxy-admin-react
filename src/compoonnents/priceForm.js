@@ -1,6 +1,4 @@
 import React from 'react';
-import { Navbar, Nav, Button, Form } from 'react-bootstrap';
-
 
 // TODO what to name this
 class priceForm extends React.Component {

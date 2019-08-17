@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 import { Button, Table } from 'react-bootstrap';
 
-import DisplayTable from './Table';
 import apiService from './services/api';
 
 class Clients extends Component {

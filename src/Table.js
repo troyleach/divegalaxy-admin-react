@@ -50,7 +50,6 @@ class DisplayTable extends Component {
   saveModalHandler = (event) => {
     const path = this.state.category.toLowerCase();
     const url = `${path}/${this.state.id}`
-    const body = 'stuff goes here'
     apiService.editData(url)
     this.setState({
       isShowing: false,

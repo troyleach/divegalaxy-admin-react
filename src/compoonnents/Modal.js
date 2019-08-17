@@ -25,8 +25,8 @@ const modal = (props) => {
               <Form.Label>Title</Form.Label>
               <Form.Control type="input" placeholder={props.title || "Enter title"} />
 
-              <input type="text" value={this.state.title} onChange={this.handleChange} />
-              <input type="text" value={props.title} />
+              {/* <input type="text" value={this.state.title} onChange={this.handleChange} /> */}
+              {/* <input type="text" value={props.title} /> */}
 
             </Form.Group>
             <Form.Group controlId="formGroupDescription">
