@@ -2,6 +2,8 @@ const axios = require('axios');
 const URL = process.env.REACT_APP_URL
 var HEADERS = { 'Authorization': `Token ${process.env.REACT_APP_HEADERS}` };
 
+// TODO: No error handling no good
+
 const apiService = {
   getData: (category) => {
     return axios.get(`${URL}${category}`, { headers: HEADERS })
@@ -35,7 +37,6 @@ const apiService = {
     }
     return axios(options)
       .then(res => {
-        console.log('updated stuff YO data', res.data)
         return res.data
       })
   },
@@ -54,7 +55,6 @@ const apiService = {
     }
     return axios(options)
       .then(res => {
-        console.log('updated stuff YO data', res.data)
         return res.data
       })
   },
