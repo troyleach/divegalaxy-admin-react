@@ -4,7 +4,10 @@ import { Form } from 'react-bootstrap';
 import './Modal.css';
 import './priceForm';
 
-// Make a new class called formSomething bring it here
+// TODO: Need form validations
+//  - Title required
+//  - Price required
+//  - Description optional
 const modal = (props) => {
   console.log('this is the props place', props)
   return (
@@ -23,25 +26,26 @@ const modal = (props) => {
           <Form>
             <Form.Group controlId="formGroupTitle">
               <Form.Label>Title</Form.Label>
-              <Form.Control type="input" placeholder={props.title || "Enter title"} />
+              <Form.Control type="input" name='title' value={props.title} onChange={props.change} />
 
-              {/* <input type="text" value={this.state.title} onChange={this.handleChange} /> */}
-              {/* <input type="text" value={props.title} /> */}
+              {/* <input type="text" name='title' value={props.title} onChange={props.change} /> */}
 
             </Form.Group>
             <Form.Group controlId="formGroupDescription">
               <Form.Label>Description</Form.Label>
-              <Form.Control type="input" placeholder={props.description || "Enter description"} />
+              {/* <Form.Control type="input" placeholder={props.description || "Enter description"} /> */}
+              <input type="text" name='description' value={props.description} onChange={props.change} />
             </Form.Group>
             <Form.Group controlId="formGroupPrice">
               <Form.Label>Price</Form.Label>
-              <Form.Control type="input" placeholder={props.price || "Enter price"} />
+              {/* <Form.Control type="input" placeholder={props.price || "Enter price"} /> */}
+              <input type="text" name='price' value={props.price} onChange={props.change} />
             </Form.Group>
           </Form>
         </div>
         <div className="modal-footer">
           <button className="btn-cancel" onClick={props.close}>CANCEL</button>
-          <button className="btn-continue">Save</button>
+          <button className="btn-continue" onClick={props.save}>Save</button>
         </div>
       </div>
     </div>

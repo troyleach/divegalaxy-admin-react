@@ -10,7 +10,9 @@ class GearRental extends Component {
     super(props);
     this.state = {
       data: [],
-      category: "Gear Rental"
+      category: "Gear Rental",
+      route: 'rentals',
+      model: 'rental'
     }
   }
 

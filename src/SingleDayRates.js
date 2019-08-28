@@ -5,14 +5,14 @@ import React, {
 import DisplayTable from './Table';
 import apiService from './services/api';
 
-// TODO in a compoonentDidMount() {} make my http requests here
-
 class SingleDayRates extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
-      category: "Single Day Rate"
+      category: "Single Day Rate",
+      route: 'divings',
+      model: 'diving'
     }
   }
 

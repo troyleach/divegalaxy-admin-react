@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { Button, Table } from 'react-bootstrap';
 
-// TODO fix the folder spelling
+// TODO: fix the folder spelling
 import Modal from './compoonnents/Modal';
 import apiService from './services/api';
 let category;
@@ -11,15 +11,17 @@ let category;
 class DisplayTable extends Component {
   constructor(props) {
     super(props);
-    console.log('props in display table', props.category)
     category = props.category
     this.state = {
       isShowing: false,
+      newRecord: false,
       title: '',
       description: '',
       price: '',
       itemId: '',
-      category: category
+      category,
+      route: props.route,
+      model: props.model
     }
   }
 
@@ -31,29 +33,38 @@ class DisplayTable extends Component {
       description: item.description,
       price: item.price,
       itemId: item.id,
-      category: headerString
+      category: headerString,
     })
   }
 
   openNewModalHandler = () => {
-    const headerString = `Create a New ${this.state.category}`
     this.setState({
+      newRecord: true,
       isShowing: true,
       title: '',
       description: '',
       price: '',
       itemId: '',
-      category: headerString
+      category: `Create a New ${this.state.category}`
     })
   }
 
-  saveModalHandler = (event) => {
-    const path = this.state.category.toLowerCase();
-    const url = `${path}/${this.state.id}`
-    apiService.editData(url)
+  // Horrible name
+  changeThis = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    })
+  }
+
+  saveModalHandler = () => {
     this.setState({
       isShowing: false,
     })
+    if (this.state.newRecord) {
+      apiService.newData(this.state)
+    } else {
+      apiService.editData(this.state)
+    }
     // BAD BAD use react to update component
     window.location.reload(true);
 
@@ -70,9 +81,9 @@ class DisplayTable extends Component {
     })
   }
 
+  // Feel like we should pass the item to the delete function? Not just the id
   deleteHandler = (id) => {
-    const path = this.state.category.toLowerCase();
-    const url = `${path}/${id}`
+    const url = `${this.state.route}/${id}`
     apiService.deleteData(url)
     this.setState({
       isShowing: false,
@@ -126,8 +137,9 @@ class DisplayTable extends Component {
             className="modal"
             show={this.state.isShowing}
             close={this.closeModalHandler}
-            // save={this.saveModalHandler}
+            save={this.saveModalHandler}
             itemId={this.state.itemId}
+            change={this.changeThis}
             title={this.state.title}
             price={this.state.price}
             description={this.state.description}
