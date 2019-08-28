@@ -1,12 +1,13 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
+import logo from './logo_original.png';
 
 
 class Header extends React.Component {
   render() {
     return (
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
-        <Navbar.Brand href="/">Dive GalaxSea</Navbar.Brand>
+        <Navbar.Brand href="/"><img className='logo' src={logo} alt="Logo" /></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">

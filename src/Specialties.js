@@ -11,7 +11,9 @@ class Specialties extends Component {
     super(props);
     this.state = {
       data: [],
-      category: "Specialties"
+      category: "Specialties",
+      route: 'specialties',
+      model: 'specialty'
     }
   }
 

@@ -29,6 +29,10 @@
   margin-bottom: 4em;
 }
 
+.logo {
+  width: 10rem;
+}
+
 /* Buttons */
 .action-buttons {
   margin-right: .5em

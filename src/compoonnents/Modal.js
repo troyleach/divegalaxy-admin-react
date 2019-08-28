@@ -2,16 +2,17 @@ import React from 'react';
 
 import { Form } from 'react-bootstrap';
 import './Modal.css';
-import './priceForm';
 
-// Make a new class called formSomething bring it here
+// TODO: Need form validations
+//  - Title required
+//  - Price required
+//  - Description optional
 const modal = (props) => {
-  console.log('this is the props place', props)
   return (
     <div>
       <div className="modal-wrapper"
         style={{
-          transform: props.show ? 'translateY(-90vh)' : 'translateY(-100vh)',
+          transform: props.show ? 'translateY(-95vh)' : 'translateY(-100vh)',
           opacity: props.show ? '1' : '0',
           display: props.show ? 'block' : 'none',
         }}>
@@ -23,25 +24,21 @@ const modal = (props) => {
           <Form>
             <Form.Group controlId="formGroupTitle">
               <Form.Label>Title</Form.Label>
-              <Form.Control type="input" placeholder={props.title || "Enter title"} />
-
-              {/* <input type="text" value={this.state.title} onChange={this.handleChange} /> */}
-              {/* <input type="text" value={props.title} /> */}
-
+              <Form.Control type="input" name='title' placeholder={'Enter Title'} value={props.title} onChange={props.change} />
             </Form.Group>
             <Form.Group controlId="formGroupDescription">
               <Form.Label>Description</Form.Label>
-              <Form.Control type="input" placeholder={props.description || "Enter description"} />
+              <Form.Control type="input" placeholder={"Enter description"} name='description' value={props.description} onChange={props.change} />
             </Form.Group>
             <Form.Group controlId="formGroupPrice">
               <Form.Label>Price</Form.Label>
-              <Form.Control type="input" placeholder={props.price || "Enter price"} />
+              <Form.Control type="input" placeholder={"Enter price"} name='price' value={props.price} onChange={props.change} />
             </Form.Group>
           </Form>
         </div>
         <div className="modal-footer">
           <button className="btn-cancel" onClick={props.close}>CANCEL</button>
-          <button className="btn-continue">Save</button>
+          <button className="btn-continue" onClick={props.save}>Save</button>
         </div>
       </div>
     </div>

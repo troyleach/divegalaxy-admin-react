@@ -1,9 +1,8 @@
-
 const axios = require('axios');
+const URL = process.env.REACT_APP_URL
+var HEADERS = { 'Authorization': `Token ${process.env.REACT_APP_HEADERS}` };
 
-const URL = "http://localhost:3000/";
-const HEADERS = { 'Authorization': 'Token "0216e2a5ae26a98de75dbfc4a353182a"' };
-
+// TODO: No error handling no good
 
 const apiService = {
   getData: (category) => {
@@ -14,9 +13,9 @@ const apiService = {
       })
   },
 
-  deleteData: (pathAndId) => {
+  deleteData: (path) => {
     console.log("Deleted")
-    return axios.delete(`${URL}${pathAndId}`, { headers: HEADERS })
+    return axios.delete(`${URL}${path}`, { headers: HEADERS })
       .then(res => {
         console.log('Delete data', res.data)
         return res.data
@@ -24,23 +23,41 @@ const apiService = {
   },
 
   editData: (item) => {
-    console.log("Edit this: ", item)
-    // should be item.title
-    const form = {
-      specialty: {
-        title: item.title,
-        description: item.description,
-        price: item.price
+    const options = {
+      method: 'patch',
+      url: `${URL}${item.route}/${item.itemId}`,
+      headers: HEADERS,
+      data: {
+        [item.model]: {
+          title: item.title,
+          description: item.description,
+          price: item.price
+        }
       }
     }
-    const pathAndId = 99999;
-    return axios.delete(`${URL}${pathAndId}`, { headers: HEADERS }, form)
+    return axios(options)
       .then(res => {
-        console.log('Delete data', res.data)
         return res.data
       })
   },
-  newData: (item) => { },
+  newData: (item) => {
+    const options = {
+      method: 'post',
+      url: `${URL}${item.route}`,
+      headers: HEADERS,
+      data: {
+        [item.model]: {
+          title: item.title,
+          description: item.description,
+          price: item.price
+        }
+      }
+    }
+    return axios(options)
+      .then(res => {
+        return res.data
+      })
+  },
   logIn: () => { },
   logOut: () => { }
 }

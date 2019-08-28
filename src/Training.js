@@ -10,7 +10,9 @@ class Training extends Component {
     super(props);
     this.state = {
       data: [],
-      category: "Training"
+      category: "Training",
+      route: 'trainings',
+      model: 'training'
     }
   }
 
