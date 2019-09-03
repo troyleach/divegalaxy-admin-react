@@ -6,6 +6,7 @@ import { Button, Table } from 'react-bootstrap';
 // TODO: fix the folder spelling
 import Modal from './compoonnents/Modal';
 import apiService from './services/api';
+// import { async } from 'q';
 let category;
 
 class DisplayTable extends Component {
@@ -56,14 +57,22 @@ class DisplayTable extends Component {
     })
   }
 
-  saveModalHandler = () => {
+  saveModalHandler = async () => {
     this.setState({
       isShowing: false,
     })
     if (this.state.newRecord) {
-      apiService.newData(this.state)
+      try {
+        await apiService.newData(this.state)
+      } catch (error) {
+        console.log('Error in the create action ', error)
+      }
     } else {
-      apiService.editData(this.state)
+      try {
+        await apiService.editData(this.state)
+      } catch (error) {
+        console.log('Error in the edit action ', error)
+      }
     }
     // BAD BAD use react to update component
     window.location.reload(true);
