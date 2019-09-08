@@ -30,7 +30,6 @@ const apiService = {
       method: 'patch',
       url: `${URL}${item.route}/${item.itemId}`,
       headers: HEADERS,
-      timeout: 15,
       data: {
         [item.model]: {
           title: item.title,
@@ -49,7 +48,6 @@ const apiService = {
       method: 'post',
       url: `${URL}${item.route}`,
       headers: HEADERS,
-      timeout: 15,
       data: {
         [item.model]: {
           title: item.title,
