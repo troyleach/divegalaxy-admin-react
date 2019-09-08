@@ -75,7 +75,7 @@ class DisplayTable extends Component {
       }
     }
     // BAD BAD use react to update component
-    window.location.reload(true);
+    // window.location.reload(true);
 
   }
 
@@ -98,7 +98,7 @@ class DisplayTable extends Component {
       isShowing: false,
     })
     // BAD BAD use react to update component
-    window.location.reload(true);
+    // window.location.reload(true);
   }
 
   renderTableData() {
