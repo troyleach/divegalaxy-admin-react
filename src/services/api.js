@@ -1,6 +1,9 @@
 const axios = require('axios');
 const URL = process.env.REACT_APP_URL
-var HEADERS = { 'Authorization': `Token ${process.env.REACT_APP_HEADERS}` };
+var HEADERS = {
+  'Authorization': `Token ${process.env.REACT_APP_HEADERS}`,
+  'Content-Type': 'application/json'
+};
 
 // TODO: No error handling no good
 

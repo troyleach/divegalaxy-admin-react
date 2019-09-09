@@ -6,6 +6,8 @@ import { Button, Table } from 'react-bootstrap';
 // TODO: fix the folder spelling
 import Modal from './compoonnents/Modal';
 import apiService from './services/api';
+import { async } from 'q';
+// import { async } from 'q';
 let category;
 
 class DisplayTable extends Component {
@@ -56,18 +58,24 @@ class DisplayTable extends Component {
     })
   }
 
-  saveModalHandler = () => {
+  saveModalHandler = async () => {
+    if (this.state.newRecord) {
+      try {
+        await apiService.newData(this.state)
+      } catch (error) {
+        console.log('Error in the create action ', error)
+      }
+    } else {
+      try {
+        await apiService.editData(this.state)
+      } catch (error) {
+        console.log('Error in the edit action ', error)
+      }
+    }
     this.setState({
       isShowing: false,
     })
-    if (this.state.newRecord) {
-      apiService.newData(this.state)
-    } else {
-      apiService.editData(this.state)
-    }
-    // BAD BAD use react to update component
-    window.location.reload(true);
-
+    window.location.reload(false);
   }
 
   closeModalHandler = () => {
@@ -82,14 +90,13 @@ class DisplayTable extends Component {
   }
 
   // Feel like we should pass the item to the delete function? Not just the id
-  deleteHandler = (id) => {
+  deleteHandler = async (id) => {
     const url = `${this.state.route}/${id}`
-    apiService.deleteData(url)
+    await apiService.deleteData(url)
     this.setState({
       isShowing: false,
     })
-    // BAD BAD use react to update component
-    window.location.reload(true);
+    window.location.reload(false);
   }
 
   renderTableData() {
