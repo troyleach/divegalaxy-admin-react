@@ -1,14 +1,15 @@
 const axios = require('axios');
 const URL = process.env.REACT_APP_URL
+const token = localStorage.token
 var HEADERS = {
-  'Authorization': `Token ${process.env.REACT_APP_HEADERS}`,
+  'Authorization': `Token ${token}`,
   'Content-Type': 'application/json'
 };
 
 // TODO: No error handling no good
 
 const apiService = {
-  getData: (category) => {
+  getData: (category, token) => {
     return axios.get(`${URL}${category}`, { headers: HEADERS })
       .then(res => {
         console.log('GET the data', res.data)
@@ -61,8 +62,30 @@ const apiService = {
         return res.data
       })
   },
-  logIn: () => { },
-  logOut: () => { }
+  login: (user) => {
+    console.log('here in api call', user)
+    const options = {
+      method: 'post',
+      url: `${URL}login`,
+      headers: { 'Content-Type': 'application/json' },
+      data: {
+        users_information: {
+          email: user.email,
+          password: user.password
+        }
+      }
+    }
+    return axios(options)
+      .then(res => {
+        return res;
+      })
+      .catch(err => {
+        return err;
+      })
+  },
+  logout: () => {
+    localStorage.clear()
+  }
 }
 
 export default apiService;

@@ -1,15 +1,19 @@
 import React, { Component } from "react";
 import { Button, Form, FormGroup, FormControl } from "react-bootstrap";
+import { Redirect } from 'react-router';
 import "./Login.css";
+import apiService from './services/api';
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
+    console.log('this is the props yo ', props)
 
     this.state = {
+      redirect: false,
+      errors: [],
       email: "",
-      password: "",
-      isAuthenticated: false
+      password: ""
     };
   }
 
@@ -18,17 +22,46 @@ export default class Login extends Component {
   }
 
   handleChange = event => {
+    console.log('here in the event', event)
     this.setState({
       [event.target.id]: event.target.value
     });
   }
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
+    // reset password on first login
     event.preventDefault();
-    // This is where I will make the api call to log in
+    console.log('in the handle submit deal')
+    const { email, password } = this.state
+    const data = { email, password };
+    const result = await apiService.login(data);
+    if (result.status !== 200) {
+      alert('We could not find either the email or password. Please try again')
+    }
+
+    if (result.status === 200) {
+      console.log('we were a success')
+      this.setState({
+        redirect: true
+      })
+      localStorage.setItem("isAuthenticated", JSON.stringify(true))
+      debugger
+      localStorage.setItem("token", result.data.access_token)
+    }
+    // if 200 success && firstLogin
+    //    redirect to reset password
+    // else
+    //    redirect to home page
+    // status != 200
+
   }
 
   render() {
+    const { redirect, errors } = this.state;
+    if (redirect) {
+      console.log('in the redirect stuff');
+      return <Redirect to='/' />
+    }
     return (
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
