@@ -21,16 +21,13 @@ export default class Login extends Component {
   }
 
   handleChange = event => {
-    console.log('here in the event', event)
     this.setState({
       [event.target.id]: event.target.value
     });
   }
 
   handleSubmit = async event => {
-    // reset password on first login
     event.preventDefault();
-    console.log('in the handle submit deal')
     const { email, password } = this.state
     const data = { email, password };
     const result = await apiService.login(data);
@@ -55,7 +52,7 @@ export default class Login extends Component {
   }
 
   render() {
-    const { redirect, errors } = this.state;
+    const { redirect } = this.state;
     if (redirect) {
       console.log('in the redirect stuff');
       return <Redirect to='/' />
