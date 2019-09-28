@@ -63,7 +63,6 @@ const apiService = {
       })
   },
   login: (user) => {
-    console.log('here in api call', user)
     const options = {
       method: 'post',
       url: `${URL}login`,
@@ -84,7 +83,19 @@ const apiService = {
       })
   },
   logout: () => {
-    localStorage.clear()
+    const options = {
+      method: 'post',
+      url: `${URL}logout`,
+      headers: HEADERS,
+    }
+    return axios(options)
+      .then(res => {
+        localStorage.clear()
+        return res;
+      })
+      .catch(err => {
+        return err;
+      })
   }
 }
 

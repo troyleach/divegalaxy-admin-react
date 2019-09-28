@@ -7,7 +7,6 @@ import apiService from './services/api';
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    console.log('this is the props yo ', props)
 
     this.state = {
       redirect: false,
@@ -45,7 +44,6 @@ export default class Login extends Component {
         redirect: true
       })
       localStorage.setItem("isAuthenticated", JSON.stringify(true))
-      debugger
       localStorage.setItem("token", result.data.access_token)
     }
     // if 200 success && firstLogin
