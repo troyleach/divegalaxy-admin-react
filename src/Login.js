@@ -4,6 +4,8 @@ import { Redirect } from 'react-router';
 import "./Login.css";
 import apiService from './services/api';
 
+import Header from './Header';
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +16,8 @@ export default class Login extends Component {
       email: "",
       password: ""
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   validateForm() {
@@ -30,61 +34,56 @@ export default class Login extends Component {
     event.preventDefault();
     const { email, password } = this.state
     const data = { email, password };
-    const result = await apiService.login(data);
-    if (result.status !== 200) {
-      alert('We could not find either the email or password. Please try again')
-    }
-
-    if (result.status === 200) {
-      console.log('we were a success')
-      this.setState({
-        redirect: true
-      })
-      localStorage.setItem("isAuthenticated", JSON.stringify(true))
-      localStorage.setItem("token", result.data.access_token)
-    }
-    // if 200 success && firstLogin
-    //    redirect to reset password
-    // else
-    //    redirect to home page
-    // status != 200
+    apiService.login(data).then(response => {
+      if (response.status !== 200) {
+        alert('We could not find either the email or password. Please try again')
+      }
+      if (response.status === 200) {
+        this.setState({
+          redirect: true
+        })
+      }
+    });
 
   }
+
 
   render() {
     const { redirect } = this.state;
     if (redirect) {
-      console.log('in the redirect stuff');
       return <Redirect to='/' />
     }
     return (
-      <div className="Login">
-        <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="email">
-            <Form.Label>Email</Form.Label>
-            <FormControl
-              autoFocus
-              type="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </FormGroup>
-          <FormGroup controlId="password">
-            <Form.Label>Password</Form.Label>
-            <FormControl
-              value={this.state.password}
-              onChange={this.handleChange}
-              type="password"
-            />
-          </FormGroup>
-          <Button
-            block
-            disabled={!this.validateForm()}
-            type="submit"
-          >
-            Login
+      <div className="App">
+        <Header  {...this.state} />
+        <div className="Login">
+          <form onSubmit={this.handleSubmit}>
+            <FormGroup controlId="email">
+              <Form.Label>Email</Form.Label>
+              <FormControl
+                autoFocus
+                type="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <FormGroup controlId="password">
+              <Form.Label>Password</Form.Label>
+              <FormControl
+                value={this.state.password}
+                onChange={this.handleChange}
+                type="password"
+              />
+            </FormGroup>
+            <Button
+              block
+              disabled={!this.validateForm()}
+              type="submit"
+            >
+              Login
           </Button>
-        </form>
+          </form>
+        </div>
       </div>
     );
   }

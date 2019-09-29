@@ -1,16 +1,19 @@
 import React, {
   Component
 } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 
-import Header from './Header';
-import Footer from './Footer';
+// FIXME: I feel there is a better way then putting the header/footer
+// In each file but I could not get it to work
+// import Header from './Header';
+// import Footer from './Footer';
 
 import GearRental from './GearRental';
 import SingleDayRates from './SingleDayRates';
 import Training from './Training';
 import Specialties from './Specialties';
 import Clients from './Clients';
+import LandingPage from './LandingPage';
 import Login from './Login'
 
 class Home extends Component {
@@ -28,39 +31,31 @@ class Home extends Component {
   async componentDidMount() {
     // this is kind of like the entry point. this will run on every route.
     // this is where global code must go
-    console.log('did this render and if so when')
+    if (!this.state.isAuthenticated) {
+      return <Redirect to='/login' />
+    }
   }
 
+  componentWillMount() { };
+
   render() {
-    const { isAuthenticated } = this.state;
-    console.log('home component isAuthenticated: ', this.state)
-    if (!isAuthenticated) {
-      console.log('should be here and redirect')
-      return <Login />
-    }
     return (
       <div className="App">
         <div>
-          <Header />
-          <Route exact path="/" render={() => (
-            <div>
-              {!this.state.isAuthenticated ? (
-                <Login />
-              ) : (
-                  <div className='container'>
-                    <h1>Welcome to the Admin Panel</h1>
-                  </div >
-                )}
-            </div>
-          )} />
-          <Route exact={true} path="/single-day-rates" component={SingleDayRates} />
-          <Route path="/gear-rental" component={GearRental} />
-          <Route path="/training" component={Training} />
-          <Route path="/specialties" component={Specialties} />
-          <Route path="/clients" component={Clients} />
-          <Route path="/login" component={Login} />
+          <Switch>
+            <Route exact path="/" render={() => (
+              <div>
+                <LandingPage {...this.state} />
+              </div>
+            )} />
+            <Route path="/single-day-rates" component={SingleDayRates} />
+            <Route path="/gear-rental" component={GearRental} />
+            <Route path="/training" component={Training} />
+            <Route path="/specialties" component={Specialties} />
+            <Route path="/clients" component={Clients} />
+            <Route path="/login" component={Login} />
+          </Switch>
         </div>
-        <Footer />
       </div >
     );
   };

@@ -2,6 +2,8 @@ import React, {
   Component
 } from 'react';
 
+import Header from './Header';
+import Footer from './Footer';
 import DisplayTable from './Table';
 import apiService from './services/api';
 
@@ -23,10 +25,14 @@ class SingleDayRates extends Component {
 
   render() {
     return (
-      <div className='container'>
-        <h3>{this.state.category}</h3>
-        <DisplayTable {...this.state} />
-      </div >
+      <div className="App">
+        <Header  {...this.state} />
+        <div className='container'>
+          <h3>{this.state.category}</h3>
+          <DisplayTable {...this.state} />
+        </div >
+        <Footer />
+      </div>
     )
   }
 }

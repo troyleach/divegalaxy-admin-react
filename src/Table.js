@@ -7,7 +7,6 @@ import { Button, Table } from 'react-bootstrap';
 import Modal from './compoonnents/Modal';
 import apiService from './services/api';
 import { async } from 'q';
-// import { async } from 'q';
 let category;
 
 class DisplayTable extends Component {

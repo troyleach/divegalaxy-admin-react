@@ -76,13 +76,19 @@ const apiService = {
     }
     return axios(options)
       .then(res => {
+        localStorage.setItem("isAuthenticated", JSON.stringify(true))
+        localStorage.setItem("token", res.data.access_token)
         return res;
       })
       .catch(err => {
         return err;
       })
   },
-  logout: () => {
+  logout: token => {
+    var HEADERS = {
+      'Authorization': `Token ${token}`,
+      'Content-Type': 'application/json'
+    };
     const options = {
       method: 'post',
       url: `${URL}logout`,

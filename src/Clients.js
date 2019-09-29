@@ -2,15 +2,20 @@ import React, {
   Component
 } from 'react';
 import { Button, Table } from 'react-bootstrap';
+import { Redirect } from 'react-router';
 
 import apiService from './services/api';
+
+import Header from './Header';
+import Footer from './Footer';
 
 class Clients extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: [],
-      category: "Clients"
+      category: "Clients",
+      loggedIn: JSON.parse(localStorage.isAuthenticated)
     }
   }
 
@@ -19,8 +24,10 @@ class Clients extends Component {
   }
 
   async componentDidMount() {
-    const data = await apiService.getData('users')
-    this.setState({ data: data });
+    if (this.state.loggedIn) {
+      const data = await apiService.getData('users')
+      this.setState({ data: data });
+    }
   }
 
   // TODO this can be moved out since it is used twice in the app
@@ -42,11 +49,16 @@ class Clients extends Component {
   }
 
   render() {
+    const { loggedIn } = this.state
+    if (!loggedIn) {
+      return <Redirect to='/login' />
+    }
+
     return (
       <div className="App">
+        <Header  {...this.state} />
         <div className='container'>
           <h3>{this.state.category}</h3>
-
           <Table striped bordered hover size="sm">
             <thead>
               <tr>
@@ -61,6 +73,7 @@ class Clients extends Component {
             </tbody>
           </Table>
         </div >
+        <Footer />
       </div >
     );
   };

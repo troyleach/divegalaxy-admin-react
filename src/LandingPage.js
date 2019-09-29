@@ -2,35 +2,36 @@ import React, {
   Component
 } from 'react';
 
-import apiService from './services/api';
+import { Redirect } from 'react-router';
 
 import Header from './Header';
 import Footer from './Footer';
-import DisplayTable from './Table';
 
-class GearRental extends Component {
+class LandingPage extends Component {
   constructor(props) {
     super(props);
+
+    const auth = JSON.parse(localStorage.getItem("isAuthenticated")) || false;
     this.state = {
-      data: [],
-      category: "Gear Rental",
-      route: 'rentals',
-      model: 'rental'
-    }
+      isAuthenticated: auth,
+      category: 'Landing Page'
+    };
   }
 
   async componentDidMount() {
-    const data = await apiService.getData('rentals')
-    this.setState({ data: data });
   }
 
   render() {
+    const { isAuthenticated } = this.state
+    if (!isAuthenticated) {
+      console.log('should be here and redirect landing page')
+      return <Redirect to='/login' />
+    }
     return (
       <div className="App">
         <Header  {...this.state} />
         <div className='container'>
           <h3>{this.state.category}</h3>
-          <DisplayTable {...this.state} />
         </div >
         <Footer />
       </div >
@@ -38,4 +39,4 @@ class GearRental extends Component {
   };
 }
 
-export default GearRental;
+export default LandingPage;
