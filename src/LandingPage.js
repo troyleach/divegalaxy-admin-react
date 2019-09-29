@@ -14,17 +14,15 @@ class LandingPage extends Component {
     const auth = JSON.parse(localStorage.getItem("isAuthenticated")) || false;
     this.state = {
       isAuthenticated: auth,
-      category: 'Landing Page'
+      category: 'Dive GalaxSea Dashboard'
     };
   }
 
-  async componentDidMount() {
-  }
+  async componentDidMount() { }
 
   render() {
     const { isAuthenticated } = this.state
     if (!isAuthenticated) {
-      console.log('should be here and redirect landing page')
       return <Redirect to='/login' />
     }
     return (
@@ -32,6 +30,7 @@ class LandingPage extends Component {
         <Header  {...this.state} />
         <div className='container'>
           <h3>{this.state.category}</h3>
+          <div>Click on one of the tabs in the upper navigation bar to edit your rates</div>
         </div >
         <Footer />
       </div >

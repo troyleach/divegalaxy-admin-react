@@ -35,13 +35,14 @@ class Clients extends Component {
     return this.state.data.map((item, index) => {
       const { id, first_name, last_name, email, phone } = item //destructuring
       const fullName = `${first_name} ${last_name}`
+      const fullEmail = `mailto:${email}?Subject=Email%20Dive%20Galaxsea`;
       return (
         <tr key={id}>
           <td>{fullName}</td>
           <td>{email}</td>
           <td>{phone}</td>
           <td>
-            <Button variant="outline-success" className="action-buttons open-modal-btn" onClick={() => this.emailClientHandler(item)}>Email</Button>
+            <Button variant="outline-success" className="action-buttons open-modal-btn" ><a href={fullEmail} target="_top">Email</a></Button>
           </td>
         </tr>
       )
